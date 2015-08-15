@@ -1,3 +1,4 @@
 x = 3
-print(x)
-y = x + y
+y = 4
+z = 2
+print(z)
