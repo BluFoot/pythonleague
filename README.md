@@ -1,2 +1,2 @@
 # pythonleague
-link: [alex.cornellier.com](alex.cornellier.com)
+link: [alex.cornellier.com](http://alex.cornellier.com)
