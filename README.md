@@ -1,2 +1,2 @@
 # pythonleague
-repo for league api challenge
+link: alex.cornellier.com
