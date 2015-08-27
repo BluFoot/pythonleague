@@ -280,7 +280,7 @@ table {
 }
 
 .top_data {
-    max-width: 477px;
+    max-width: 436px;
 }
 
 #item_change, #item_top {
@@ -299,3 +299,5 @@ table {
     top: 10px;
     right: 10px;
 }
+
+

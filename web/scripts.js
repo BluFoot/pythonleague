@@ -118,10 +118,10 @@ function post_icons() {
     txt2 = "<label for = 'all_champ_icons' class = 'icon button_icon champ_icon all_icon'>All</label>";
     $("#champ_icons").append(txt1, txt2);
     for (key in champs) {
+        name = champs[key].name;
         txt1 = "<input type = 'radio' name = 'champ_icons' id = '" + key + "'>";
-        txt2 = "<label for ='" + key + "' class = 'icon button_icon champ_icon'></label>";
+        txt2 = '<label for ="' + key + '" title = "' + name + '" class = "icon button_icon champ_icon"></label>';
         txt3 = "url(" + dragon_champ + key + ".png)";
-        log(txt3)
         $("#champ_icons").append(txt1, txt2);
         $("label[for='" + key + "']").css('background-image', txt3);
     }
@@ -129,8 +129,9 @@ function post_icons() {
     txt2 = "<label for = 'all_item_icons' class = 'icon button_icon item_icon all_icon'>All</label>";
     $("#item_icons").append(txt1, txt2);
     for (key in items) {
+        name = items[key].name;
         txt1 = "<input type = 'radio' name = 'item_icons' id = '" + key + "'>";
-        txt2 = "<label for ='" + key + "' class = 'icon button_icon item_icon'></label>";
+        txt2 = '<label for ="' + key + '" title = "' + name + '" class = "icon button_icon item_icon"></label>';
         txt3 = 'url(' + dragon_item + key + '.png)';
         $("#item_icons").append(txt1, txt2);
         $("#item_icons > label[for='" + key + "']").css('background-image', txt3);
@@ -140,7 +141,7 @@ function post_icons() {
 function Champ(key, queue) {
     this.key = key;
     this.name = champs[key].name;
-    this.icon = "<img data-key = '" + key + "' title = '" + this.name + "' class='icon champ_icon data_icon' src='" + dragon_champ + key + ".png'>";
+    this.icon = '<img data-key = "' + key + '" title = "' + this.name + '" class="icon champ_icon data_icon" src="' + dragon_champ + key + '.png">';
     this.playrate1 = champs[key].stats['5.11'][queue].playrate + '%';
     this.playrate2 = champs[key].stats['5.14'][queue].playrate + '%';
     this.winrate1 = champs[key].stats['5.11'][queue].winrate + '%';
@@ -150,7 +151,7 @@ function Champ(key, queue) {
 function Item(key, queue) {
     this.key = key;
     this.name = items[key].name;
-    this.icon = "<img data-key = '" + key + "' title = '" + this.name + "' class='icon item_icon data_icon' src='" + dragon_item + key + ".png'>";
+    this.icon = '<img data-key = "' + key + '" title = "' + this.name + '" class="icon item_icon data_icon" src="' + dragon_item + key + '.png">';
     this.playrate1 = items[key].stats['5.11'][queue].playrate + '%';
     this.playrate2 = items[key].stats['5.14'][queue].playrate + '%';
     this.winrate1 = items[key].stats['5.11'][queue].winrate + '%';
@@ -369,8 +370,9 @@ function post_champ_data(key) {
             var top = champs[key].items[patch][cur_queue]["top_" + categories[j]];
             var top_length = top.length;
             for (k = 0; k < 10 && k < top_length; k++) {
+                name = items[top[k]].name;
                 rate = champs[key].items[patch][cur_queue][top[k]][categories[j]] + '%';
-                img = "<img data-key='"+top[k]+"' src='"+dragon_item+top[k]+".png' title = '"+rate+"'' class='icon item_icon data_icon'>";
+                img = '<img data-key="'+top[k]+'" src="'+dragon_item+top[k]+'.png" title="'+rate+' '+name+'" class="icon item_icon data_icon">';
                 $("#champ_top" + i + j + " .top_img").append(img);
             }
         }
@@ -388,7 +390,7 @@ function post_more_champ_data() {
             var top_length = top.length;
             for (k = 10; k < 20 && k < top_length; k++) {
                 rate = champs[key].items[patch][cur_queue][top[k]][categories[j]] + '%';
-                img = "<img data-key='"+top[k]+"' src = '"+dragon_item+top[k]+".png' title = '"+rate+"'' class = 'icon item_icon data_icon'>";
+                img = '<img data-key="'+top[k]+'" src="'+dragon_item+top[k]+'.png" title="'+rate+' '+name+'" class="icon item_icon data_icon">';
                 $("#champ_top" + i + j + " .top_img").append(img);
             }
         }
@@ -399,7 +401,7 @@ function post_item_data(key) {
     $("#item_more").show();
     var name = items[key].name;
     $("#data_title").text(name);
-    $("#item_img").css('background-image', 'url("' + dragon_item + key + '.png');
+    $("#item_img").css('background-image', 'url(' + dragon_item + key + '.png)');
     $("#item_img").attr('data-key', key);
 
     for (i = patches.length - 1; i >= 0; i--) {
@@ -411,7 +413,7 @@ function post_item_data(key) {
             var top_length = top.length;
             for (k = 0; k < 10 && k < top_length; k++) {
                 rate = items[key].champs[patch][cur_queue][top[k]][categories[j]] + '%';
-                img = "<img data-key='"+top[k]+"' src = '"+dragon_champ+top[k]+".png' title = '"+rate+"' class = 'icon champ_icon data_icon'>";
+                img = '<img data-key="'+top[k]+'" src="'+dragon_champ+top[k]+'.png" title="'+rate+' '+name+'" class="icon champ_icon data_icon">';
                 $("#item_top" + i + j + " .top_img").append(img);
             }
         }
@@ -429,7 +431,7 @@ function post_more_item_data() {
             var top_length = top.length;
             for (k = 10; k < 20 && k < top_length; k++) {
                 rate = items[key].champs[patch][cur_queue][top[k]][categories[j]] + '%';
-                img = "<img data-key='"+top[k]+"' src = '"+dragon_champ+top[k]+".png' title = '"+rate+"'' class = 'icon champ_icon data_icon'>";
+                img = '<img data-key="'+top[k]+'" src="'+dragon_champ+top[k]+'.png" title="'+rate+' '+name+'" class="icon champ_icon data_icon">';
                 $("#item_top" + i + j + " .top_img").append(img);
             }
         }
@@ -440,9 +442,9 @@ function post_combo_data(champ_key, item_key) {
     var champ_name = champs[champ_key].name;
     var item_name = items[item_key].name;
     $("#data_title").text(champ_name + ' with ' + item_name);
-    $("#combo_champ_img").css('background-image', 'url(' + dragon_champ + champ_key + '.png');
-    $("#combo_item_img").css('background-image', 'url("' + dragon_item + item_key + '.png');
-    $("#combo_data").css('background-image', 'url("' + dragon_splash + champ_key + '_0.jpg")');
+    $("#combo_champ_img").css('background-image', 'url(' + dragon_champ + champ_key + '.png)');
+    $("#combo_item_img").css('background-image', 'url(' + dragon_item + item_key + '.png)');
+    $("#combo_data").css('background-image', 'url(' + dragon_splash + champ_key + '_0.jpg)');
 
     for (i = patches.length - 1; i >= 0; i--) {
         patch = patches[i];
