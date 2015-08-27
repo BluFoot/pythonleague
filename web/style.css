@@ -1,0 +1,301 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    -moz-box-sizing: border-box;
+    -webkkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+#loading_screen{
+    padding-top: 75px;
+}
+
+section {
+    padding: 7px;
+    text-align: center;
+}
+
+.boxed {
+    background-color: #ECF0F1;
+    border: 1px solid #CFD9DB;
+}
+
+/* CORE */
+header {
+	display:inline-flex;
+    position: fixed;
+    background-color: #34495e;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    color: white;
+    font-size: 16px;
+    border-bottom: 1px solid black;
+    box-shadow: 0px 2px 1px #888888;
+}
+
+header * {
+	margin: auto;
+}
+
+#main {
+    min-height: 100%;
+    width: 100%;
+    padding-top: 75px;
+    min-width:944px;
+}
+
+.sidebar {
+    width: 24%;
+}
+
+#center {
+	float: left;
+	margin-left: 1%;
+    width: 50%;
+}
+
+/* SIDEBARS */
+
+#left {
+    float: left;
+}
+
+#right {
+    float: right;
+}
+
+.searchbar {
+    padding: 7px;
+    border: solid 1px #fff;
+    box-shadow: inset 1px 1px 2px 0 #707070;
+    transition: box-shadow 0.3s;
+}
+
+.searchbar.focus {
+    box-shadow: inset 1px 1px 2px 0 #c9c9c9;
+}
+
+/* FILTERS */
+
+.filter_box {
+    margin-top: 10px;
+}
+
+.filter {
+	cursor: pointer;
+	display: inline-block;
+	vertical-align: top;
+	margin-bottom: 8px;
+	border-radius: 5px;
+	padding: 5px 5px;
+	font-size: 14px;
+	text-decoration: none;
+	color: white;
+}
+
+.filter {
+	background-color: rgb(85,172,238);
+	box-shadow: 0px 5px 0px 0px #3C93D5;
+}
+
+.filter.secondary {
+  background-color: #9b59b6;
+  box-shadow: 0px 5px 0px 0px #82409D;
+}
+
+.filter_box input {
+	display: none;
+}
+
+.filter:hover {
+	background-color: rgba(85,172,238,.8);
+}
+
+.filter.secondary:hover {
+	background-color: #B573D0;
+}
+
+.filter:active {
+	transform: translate(0px, 5px);
+	-webkit-transform: translate(0px, 5px);
+	box-shadow: 0px 1px 0px 0px;
+}
+
+.filter_box input:checked + label {
+	transform: translate(0px, 5px);
+	-webkit-transform: translate(0px, 5px);
+	box-shadow: 0px 1px 0px 0px;
+}
+
+#options #league_choice {
+    display: none;
+}
+
+#options .filter_box {
+	display: inline-block;
+	margin: 0px 10px;
+}
+
+.item_tag_filters {
+	display: none;
+}
+
+/* ICONS */
+.icon {
+	cursor: pointer;
+	height:40px;
+	width:40px;
+
+	display: inline-block;
+	vertical-align: top;
+	margin: 1px;
+}
+
+.icon_box {
+    margin-top: 10px;
+}
+
+.champ_icon, .item_icon {
+	background-size: contain;
+}
+
+.icon_box input {
+    display: none;
+}
+
+.champ_icon:hover, .item_icon:hover{
+	box-shadow: inset 0 0 0 2px #27496d,0 5px 15px #193047;
+}
+
+.icon_box input:checked + label {
+	box-shadow: inset 0 0 0 1px #27496d,inset 0 5px 30px #193047;
+}
+
+.all_icon {
+	line-height: 40px;
+
+	font-size: 14px;
+	text-decoration: none;
+	color: white;
+	background-color: #e67e22;
+	box-shadow: inset 0 0 0 1px #27496d;
+}
+
+#all_item_icons:checked + label, #all_champ_icons:checked + label {
+	box-shadow: inset 0 0 0 1px #27496d,inset 0 1px 16px #193047;
+} 
+
+/* DATA */
+
+#data_wrapper {
+    margin-top: 10px;
+}
+
+#data {
+    margin-top: 10px;
+}
+
+.data_icon {
+    cursor: pointer;
+}
+
+#data_title {
+    background-color: #65669C;
+    color: white;
+    padding: 5px;
+    border: 2px outset gray;
+}
+
+.dataTables_info {
+	display: none;
+}
+
+.data_page {
+    position: relative;
+	display: none;
+    margin-top: 5px;
+}
+
+#overall_data {
+    display: inline;
+}
+
+table {
+    display:none;
+}
+
+/* CHAMP/ITEM/COMBO DATA */
+
+.change {
+    display: inline-block;
+}
+
+.even {
+    margin-bottom: 5px;
+}
+
+.champ_stats, .other_stats {
+    background-color: rgba(80, 110, 140, 0.72);
+    color: white;
+    vertical-align: bottom;
+}
+
+#champ_data, #combo_data {
+    min-height: 600px;
+    background-size: cover;
+    background-position: center center;
+    text-align:left;
+}
+
+
+#item_data {
+    min-height: 600px;
+    background-image: url("http://s.lolstatic.com/site/skins-arcade/faa2a1437d64ffe2539b768393685c22abdc6b22/images/extras/wallpaper/Arcade_Art_1920x1080.jpg");
+    background-size: 150% auto;
+    background-repeat: no-repeat;
+    text-align: left;
+}
+
+.change_data, .top_data {
+    position:relative;
+    display:inline-block;
+    margin-top:10px;
+    margin-left:10px;
+}
+
+.change_data {
+    width: 100%;
+}
+
+.top_data {
+    max-width: 477px;
+}
+
+#item_change, #item_top {
+    margin-top: 5px;
+}
+
+.data_img {
+    display: inline-block;
+    vertical-align:top;
+    height: 62px;
+    width: 62px;
+}
+
+#next_splash {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}

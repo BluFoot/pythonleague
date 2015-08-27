@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- HEAD -->
+
+<head>
+    <meta charset="utf-8">
+    <title>API HEAVEN</title>
+    <!-- Lato font -->
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.8/css/jquery.dataTables.css">
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- DataTables -->
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.8/js/jquery.dataTables.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- JavaScript -->
+    <script src="scripts.js"></script>
+</head>
+<!-- BODY -->
+
+<body>
+    <header>
+        <h1>PATCH COMPARER – 5.11 V 5.14</h1>
+    </header>
+    <div id="main">
+        <!-- LEFT -->
+        <div id="left" class="boxed sidebar">
+            <section>
+                <input class="searchbar" id="champ_search" type="text">
+                <div id="champ_filters" class="filter_box">
+                    <input type="radio" name="champ_filters" id="all_champ_tags" class="all_filter" checked>
+                    <label for="all_champ_tags" class="filter champ_filter">All</label>
+                    <input type="radio" name="champ_filters" id="Assassin">
+                    <label for="Assassin" class="filter champ_filter">Assassin</label>
+                    <input type="radio" name="champ_filters" id="Fighter">
+                    <label for="Fighter" class="filter champ_filter">Fighter</label>
+                    <input type="radio" name="champ_filters" id="Mage">
+                    <label for="Mage" class="filter champ_filter">Mage</label>
+                    <input type="radio" name="champ_filters" id="Marksman">
+                    <label for="Marksman" class="filter champ_filter">Marksman</label>
+                    <input type="radio" name="champ_filters" id="Support">
+                    <label for="Support" class="filter champ_filter">Support</label>
+                    <input type="radio" name="champ_filters" id="Tank">
+                    <label for="Tank" class="filter champ_filter">Tank</label>
+                </div>
+                <div id="champ_icons" class="icon_box">
+                </div>
+            </section>
+        </div>
+        <!-- CENTER -->
+        <div id="center">
+            <section id="options" class="boxed">
+                <div id="queue_choice" class="filter_box options">
+                    <input type="radio" name="queue_filter" id="normal_5x5">
+                    <label for="normal_5x5" class="filter">Normal</label>
+                    <input type="radio" name="queue_filter" id="ranked_solo" checked>
+                    <label for="ranked_solo" class="filter">Ranked</label>
+                </div>
+                <div id="species_choice" class="filter_box options">
+                    <input type="radio" name="species_filter" id="champ" checked>
+                    <label for="champ" class="filter">Champions</label>
+                    <input type="radio" name="species_filter" id="item">
+                    <label for="item" class="filter">Items</label>
+                </div>
+                <div id="league_choice" class="filter_box options">
+                    <input type="radio" name="league_filter" id="BRONZE" checked>
+                    <label for="BRONZE" class="filter secondary">Bronze</label>
+                    <input type="radio" name="league_filter" id="SILVER">
+                    <label for="SILVER" class="filter secondary">Silver</label>
+                    <input type="radio" name="league_filter" id="GOLD">
+                    <label for="GOLD" class="filter secondary">Gold</label>
+                    <input type="radio" name="league_filter" id="PLATINUM">
+                    <label for="PLATINUM" class="filter secondary">Platinum</label>
+                    <input type="radio" name="league_filter" id="DIAMOND">
+                    <label for="DIAMOND" class="filter secondary">Diamond</label>
+                </div>
+            </section>
+            <section id="data_wrapper" class="boxed">
+                <h2 id="data_title" class="boxed">LOADING...</h2>
+                <div id="data_page_wrapper">
+                    <div id="overall_data" class="data_page">
+                        <table id="normal_5x5_champ_data" class="display compact">
+                            <thead>
+                                <th>Champion</th>
+                                <th></th>
+                                <th>5.11 Playrate</th>
+                                <th>5.14 Playrate</th>
+                                <th>5.11 Winrate</th>
+                                <th>5.14 Winrate</th>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <table id="ranked_solo_champ_data" class="display compact">
+                            <thead>
+                                <th>Champion</th>
+                                <th></th>
+                                <th>5.11 Playrate</th>
+                                <th>5.14 Playrate</th>
+                                <th>5.11 Winrate</th>
+                                <th>5.14 Winrate</th>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <table id="normal_5x5_item_data" class="display compact">
+                            <thead>
+                                <th>Item</th>
+                                <th></th>
+                                <th>5.11 Playrate</th>
+                                <th>5.14 Playrate</th>
+                                <th>5.11 Winrate</th>
+                                <th>5.14 Winrate</th>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <table id="ranked_solo_item_data" class="display compact">
+                            <thead>
+                                <th>Item</th>
+                                <th></th>
+                                <th>5.11 Playrate</th>
+                                <th>5.14 Playrate</th>
+                                <th>5.11 Winrate</th>
+                                <th>5.14 Winrate</th>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div id="champ_data" class="data_page">
+                        <div id="champ_change" class="change_data">
+                            <section class="change champ_stats boxed">
+                                <h3>Playrate</h3>
+                                <h3>
+                                <span id = "champ_change00"></span>
+                                <span>&rarr;</span>
+                                <span id = "champ_change10"></span>
+                            </h3>
+                            </section>
+                            <section class="change champ_stats boxed">
+                                <h3>Winrate</h3>
+                                <h3>
+                                <span id = "champ_change01"></span>
+                                <span>&rarr;</span>
+                                <span id = "champ_change11"></span>
+                            </h3>
+                            </section>
+                            <section id="champ_more" class="change champ_stats boxed">
+                                <div id="champ_more_button" class="filter secondary">
+                                    More items
+                                </div>
+                            </section>
+                        </div>
+                        <div id="champ_top" class="top_data">
+                            <section id="champ_top00" class="champ_stats odd boxed">
+                                <h3>5.11 Most popular items</h3>
+                                <div class='top_img'></div>
+                            </section>
+                            <section id="champ_top10" class="champ_stats even boxed">
+                                <div class='top_img'></div>
+                                <h3>5.14 Most popular items</h3>
+                            </section>
+                            <section id="champ_top01" class="champ_stats odd boxed">
+                                <h3>5.11 Highest winrate items</h3>
+                                <div class='top_img'></div>
+                            </section>
+                            <section id="champ_top11" class="champ_stats even boxed">
+                                <div class='top_img'></div>
+                                <h3>5.14 Highest winrate items</h3>
+                            </section>
+                        </div>
+                        <div id="next_splash" class="filter secondary">
+                            Next splash
+                        </div>
+                    </div>
+                    <div id="item_data" class="data_page">
+                        <div id="item_change" class="change_data">
+                            <section id="item_img" class="data_img">
+                            </section>
+                            <section class="change other_stats boxed">
+                                <h3>Playrate</h3>
+                                <h3>
+                                <span id = "item_change00"></span>
+                                <span>&rarr;</span>
+                                <span id = "item_change10"></span>
+                            </h3>
+                            </section>
+                            <section class="change other_stats boxed">
+                                <h3>Winrate</h3>
+                                <h3>
+                                <span id = "item_change01"></span>
+                                <span>&rarr;</span>
+                                <span id = "item_change11"></span>
+                            </h3>
+                            </section>
+                            <section id="item_more" class="change other_stats boxed">
+                                <div id="item_more_button" class="filter secondary">
+                                    More champions
+                                </div>
+                            </section>
+                        </div>
+                        <div id="item_top" class="top_data">
+                            <section id="item_top00" class="other_stats odd boxed">
+                                <h3>5.11 Most popular champions</h3>
+                                <div class='top_img'></div>
+                            </section>
+                            <section id="item_top10" class="other_stats even boxed">
+                                <div class='top_img'></div>
+                                <h3>5.14 Most popular champions</h3>
+                            </section>
+                            <section id="item_top01" class="other_stats odd boxed">
+                                <h3>5.11 Highest winrate champions</h3>
+                                <div class='top_img'></div>
+                            </section>
+                            <section id="item_top11" class="other_stats even boxed">
+                                <div class='top_img'></div>
+                                <h3>5.14 Highest winrate champions</h3>
+                            </section>
+                        </div>
+                    </div>
+                    <div id="combo_data" class="data_page">
+                        <div id="combo_change" class="change_data">
+                            <section id="combo_champ_img" class="data_img champ_icon data_icon">
+                            </section>
+                            <section id="combo_item_img" class="data_img item_icon data_icon">
+                            </section>
+                            <section class="change other_stats even boxed">
+                                <h3>Playrate</h3>
+                                <h3>
+                                <span id = "combo_change00"></span>
+                                <span>&rarr;</span>
+                                <span id = "combo_change10"></span>
+                            </h3>
+                            </section>
+                            <section class="change other_stats even boxed">
+                                <h3>Winrate</h3>
+                                <h3>
+                                <span id = "combo_change01"></span>
+                                <span>&rarr;</span>
+                                <span id = "combo_change11"></span>
+                            </h3>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <!-- RIGHT -->
+        <div id="right" class="boxed sidebar">
+            <section>
+                <input id="item_search" class="searchbar" type="text">
+                <div id="item_group_filters" class="filter_box item_filters">
+                    <input id="all_item_groups" type="radio" name="item_group_filters" class="all_filter" checked>
+                    <label for="all_item_groups" class="filter item_filter">All</label>
+                    <input id="ATTACK" type="radio" name="item_group_filters">
+                    <label for="ATTACK" class="filter item_filter">Attack</label>
+                    <input id="MAGIC" type="radio" name="item_group_filters">
+                    <label for="MAGIC" class="filter item_filter">Magic</label>
+                    <input id="DEFENSE" type="radio" name="item_group_filters">
+                    <label for="DEFENSE" class="filter item_filter">Defense</label>
+                    <input id="MOVEMENT" type="radio" name="item_group_filters">
+                    <label for="MOVEMENT" class="filter item_filter">Movement</label>
+                </div>
+                <div id="ATTACK_filters" class="filter_box item_filters item_tag_filters">
+                    <input id="all_ATTACK" type="radio" name="attack_filters" class="all_filter" checked>
+                    <label for="all_ATTACK" class="filter secondary">All</label>
+                    <input id="DAMAGE" type="radio" name="attack_filters">
+                    <label for="DAMAGE" class="filter secondary">Damage</label>
+                    <input id="CRITICALSTRIKE" type="radio" name="attack_filters">
+                    <label for="CRITICALSTRIKE" class="filter secondary">Crit</label>
+                    <input id="ATTACKSPEED" type="radio" name="attack_filters">
+                    <label for="ATTACKSPEED" class="filter secondary">Speed</label>
+                    <input id="LIFESTEAL" type="radio" name="attack_filters">
+                    <label for="LIFESTEAL" class="filter secondary">Lifesteal</label>
+                </div>
+                <div id="MAGIC_filters" class="filter_box item_filters item_tag_filters">
+                    <input id="all_MAGIC" type="radio" name="magic_filters" class="all_filter" checked>
+                    <label for="all_MAGIC" class="filter secondary">All</label>
+                    <input id="SPELLDAMAGE" type="radio" name="magic_filters">
+                    <label for="SPELLDAMAGE" class="filter secondary">AP</label>
+                    <input id="COOLDOWNREDUCTION" type="radio" name="magic_filters">
+                    <label for="COOLDOWNREDUCTION" class="filter secondary">CDR</label>
+                    <input id="MANA" type="radio" name="magic_filters">
+                    <label for="MANA" class="filter secondary">Mana</label>
+                    <input id="MANAREGEN" type="radio" name="magic_filters">
+                    <label for="MANAREGEN" class="filter secondary">Mana regen</label>
+                </div>
+                <div id="DEFENSE_filters" class="filter_box item_filters item_tag_filters">
+                    <input id="all_DEFENSE" type="radio" name="defense_filters" class="all_filter" checked>
+                    <label for="all_DEFENSE" class="filter secondary">All</label>
+                    <input id="HEALTH" type="radio" name="defense_filters">
+                    <label for="HEALTH" class="filter secondary">Health</label>
+                    <input id="ARMOR" type="radio" name="defense_filters">
+                    <label for="ARMOR" class="filter secondary">Armor</label>
+                    <input id="SPELLBLOCK" type="radio" name="defense_filters">
+                    <label for="SPELLBLOCK" class="filter secondary">Magic Resist</label>
+                    <input id="HEALTHREGEN" type="radio" name="defense_filters">
+                    <label for="HEALTHREGEN" class="filter secondary">Health regen</label>
+                </div>
+                <div id="MOVEMENT_filters" class="filter_box item_filters item_tag_filters">
+                    <input id="all_MOVEMENT" type="radio" name="movement_filters" class="all_filter" checked>
+                    <label for="all_MOVEMENT" class="filter secondary">All</label>
+                    <input id="BOOTS" type="radio" name="movement_filters">
+                    <label for="BOOTS" class="filter secondary">Boots</label>
+                    <input id="NONBOOTSMOVEMENT" type="radio" name="movement_filters">
+                    <label for="NONBOOTSMOVEMENT" class="filter secondary">Other</label>
+                </div>
+                <div id="item_icons" class="icon_box">
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+
+</html>
