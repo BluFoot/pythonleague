@@ -16,7 +16,7 @@ We started this project with the goal of analyzing the effect of the AP item cha
 ###Notes
 * We recommend Firefox or Chrome, but all modern browsers are compatible.
 * A large display gives the optimal experience, but mobile phones can get every bit of information!
-* For champion's items by winrate, only items with >2% playrate are shown. Same for itemss' champions.
+* For champion's items by winrate, only items with >2% playrate are shown. Same for items' champions.
 
 ###Contact
 alex@cornellier.com
