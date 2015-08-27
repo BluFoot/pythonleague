@@ -1,0 +1,33 @@
+filter_stats = {'5.11': \
+            {'normal_5x5': \
+                {'matches_analyzed': 0, \
+                'champ_stats' : {}, \
+                'item_stats' : {} \
+                },    
+            "ranked_solo": \
+                {'matches_analyzed': 0, \
+                'champ_stats' : {}, \
+                'item_stats' : {} \
+                },    
+            }, \
+        '5.14': \
+            {"normal_5x5": \
+                {'matches_analyzed': 0, \
+                'champ_stats' : {}, \
+                'item_stats' : {} \
+                },    
+            "ranked_solo": \
+                {'matches_analyzed': 0, \
+                'champ_stats' : {}, \
+                'item_stats' : {} \
+                }, \
+            } \
+        }
+
+filter_stats['5.11']['normal_5x5']['matches_analyzed'] = 95489
+filter_stats['5.11']['normal_5x5']['champ_stats'] = 
+filter_stats['5.11']['normal_5x5']['item_stats'] = 
+
+filter_stats['5.14']['normal_5x5']['matches_analyzed'] = 29367
+filter_stats['5.14']['normal_5x5']['champ_stats'] = 
+filter_stats['5.14']['normal_5x5']['item_stats'] = 
