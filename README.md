@@ -24,5 +24,8 @@ I started this project with the goal of analyzing the effect of the AP item chan
 * Strangely, even though many AP items were buffed or nerfed, their winrates did not vary more than 2% over the 3 patches. One would especially expect Rylai's and Liandry's to rise in winrate.
 * HOWEVER, I suspect this is because many people began to buy these items on the wrong champions. The winrates for Rylai's and Liandry's rised drastically on appropriate champions (mages with AoE), such as Ahri, Karma, Orianna.
 
-### How the process works:
+###How the process works
 curler.py downloads the match details. analyzer.py analyzes them into raw_data.json. champ_data_init.py, item_data_init.py and data_organizer.py organizes raw_data.json into data files in the web/data folder. 
+
+###Future
+I hope to get a developper key and set up the website so that any 2 patches can be compared!
