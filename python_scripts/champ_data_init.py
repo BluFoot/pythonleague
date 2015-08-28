@@ -29,7 +29,7 @@ for patch in patches :
         for patch2 in patches :
             champ_data[key]['stats'][patch2] = {'normal_5x5': {}, 'ranked_solo': {}}
             for queue in queues :
-                champ_data[key]['stats'][patch2][queue] = {'plays': 0, 'wins': 0, 'playrate': 0, 'winrate': 0}
+                champ_data[key]['stats'][patch2][queue] = {'playrate': 0, 'winrate': 0, 'winrate_diff': 0}
 
         champ_data[key]['items'] = {'5.11': {}, '5.14': {}}
         for patch2 in patches :

@@ -29,7 +29,6 @@ section {
 
 /* CORE */
 header {
-	display:inline-flex;
     position: fixed;
     background-color: #34495e;
     z-index: 10;
@@ -47,6 +46,13 @@ header {
 
 header * {
 	margin: auto;
+}
+
+#git {
+    float: left;
+    line-height: 20px;
+    margin: 10px;
+    position: relative;
 }
 
 #main {
@@ -233,6 +239,7 @@ header * {
 }
 
 table {
+    width: 100%;
     display:none;
 }
 
@@ -262,7 +269,7 @@ table {
 
 #item_data {
     min-height: 600px;
-    background-image: url("http://s.lolstatic.com/site/skins-arcade/faa2a1437d64ffe2539b768393685c22abdc6b22/images/extras/wallpaper/Arcade_Art_1920x1080.jpg");
+    background-image: url("arcade.jpg");
     background-size: 150% auto;
     background-repeat: no-repeat;
     text-align: left;
@@ -281,6 +288,7 @@ table {
 
 .top_data {
     max-width: 436px;
+    margin-bottom: 10px;
 }
 
 #item_change, #item_top {
@@ -300,4 +308,9 @@ table {
     right: 10px;
 }
 
-
+.imgtxt {
+    display:inline-block;
+    text-align: center;
+    width: 42px;
+    font-size: 13px;
+}

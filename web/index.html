@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- HEAD -->
 
 <head>
     <meta charset="utf-8">
-    <title>API HEAVEN</title>
+    <title>Patch Comparer</title>
     <!-- Lato font -->
     <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
     <!-- DataTables CSS -->
@@ -18,17 +17,16 @@
     <!-- JavaScript -->
     <script src="scripts.js"></script>
 </head>
-<!-- BODY -->
 
 <body>
     <header>
+        <a id = "git" class = "filter" href = "https://github.com/BluFoot/pythonleague/blob/master/README.md">git</a>
         <h1>PATCH COMPARER – 5.11 V 5.14</h1>
     </header>
     <div id="main">
-        <!-- LEFT -->
         <div id="left" class="boxed sidebar">
             <section>
-                <input class="searchbar" id="champ_search" type="text">
+                <input class="searchbar" id="champ_search" type="text" placeholder="Enter champion">
                 <div id="champ_filters" class="filter_box">
                     <input type="radio" name="champ_filters" id="all_champ_tags" class="all_filter" checked>
                     <label for="all_champ_tags" class="filter champ_filter">All</label>
@@ -49,7 +47,6 @@
                 </div>
             </section>
         </div>
-        <!-- CENTER -->
         <div id="center">
             <section id="options" class="boxed">
                 <div id="queue_choice" class="filter_box options">
@@ -89,6 +86,7 @@
                                 <th>5.14 Playrate</th>
                                 <th>5.11 Winrate</th>
                                 <th>5.14 Winrate</th>
+                                <th>Winrate change</th>
                             </thead>
                             <tbody></tbody>
                         </table>
@@ -100,6 +98,7 @@
                                 <th>5.14 Playrate</th>
                                 <th>5.11 Winrate</th>
                                 <th>5.14 Winrate</th>
+                                <th>Winrate change</th>
                             </thead>
                             <tbody></tbody>
                         </table>
@@ -111,6 +110,7 @@
                                 <th>5.14 Playrate</th>
                                 <th>5.11 Winrate</th>
                                 <th>5.14 Winrate</th>
+                                <th>Winrate change</th>
                             </thead>
                             <tbody></tbody>
                         </table>
@@ -122,6 +122,7 @@
                                 <th>5.14 Playrate</th>
                                 <th>5.11 Winrate</th>
                                 <th>5.14 Winrate</th>
+                                <th>Winrate change</th>
                             </thead>
                             <tbody></tbody>
                         </table>
@@ -152,20 +153,24 @@
                         </div>
                         <div id="champ_top" class="top_data">
                             <section id="champ_top00" class="champ_stats odd boxed">
-                                <h3>5.11 Most popular items</h3>
+                                <h3>5.11 Most popular</h3>
                                 <div class='top_img'></div>
                             </section>
                             <section id="champ_top10" class="champ_stats even boxed">
                                 <div class='top_img'></div>
-                                <h3>5.14 Most popular items</h3>
+                                <h3>5.14 Most popular</h3>
                             </section>
                             <section id="champ_top01" class="champ_stats odd boxed">
-                                <h3>5.11 Highest winrate items</h3>
+                                <h3>5.11 Highest winrate</h3>
                                 <div class='top_img'></div>
                             </section>
                             <section id="champ_top11" class="champ_stats even boxed">
                                 <div class='top_img'></div>
-                                <h3>5.14 Highest winrate items</h3>
+                                <h3>5.14 Highest winrate</h3>
+                            </section>
+                            <section id="champ_top12" class="champ_stats odd boxed">
+                                <h3>5.14 Highest winrate change</h3>
+                                <div class='top_img'></div>
                             </section>
                         </div>
                         <div id="next_splash" class="filter secondary">
@@ -200,20 +205,24 @@
                         </div>
                         <div id="item_top" class="top_data">
                             <section id="item_top00" class="other_stats odd boxed">
-                                <h3>5.11 Most popular champions</h3>
+                                <h3>5.11 Most popular</h3>
                                 <div class='top_img'></div>
                             </section>
                             <section id="item_top10" class="other_stats even boxed">
                                 <div class='top_img'></div>
-                                <h3>5.14 Most popular champions</h3>
+                                <h3>5.14 Most popular</h3>
                             </section>
                             <section id="item_top01" class="other_stats odd boxed">
-                                <h3>5.11 Highest winrate champions</h3>
+                                <h3>5.11 Highest winrate</h3>
                                 <div class='top_img'></div>
                             </section>
                             <section id="item_top11" class="other_stats even boxed">
                                 <div class='top_img'></div>
-                                <h3>5.14 Highest winrate champions</h3>
+                                <h3>5.14 Highest winrate</h3>
+                            </section>
+                            <section id="item_top12" class="other_stats odd boxed">
+                                <h3>Highest winrate change</h3>
+                                <div class='top_img'></div>
                             </section>
                         </div>
                     </div>
@@ -244,10 +253,9 @@
                 </div>
             </section>
         </div>
-        <!-- RIGHT -->
         <div id="right" class="boxed sidebar">
             <section>
-                <input id="item_search" class="searchbar" type="text">
+                <input id="item_search" class="searchbar" type="text" placeholder="Enter item">
                 <div id="item_group_filters" class="filter_box item_filters">
                     <input id="all_item_groups" type="radio" name="item_group_filters" class="all_filter" checked>
                     <label for="all_item_groups" class="filter item_filter">All</label>

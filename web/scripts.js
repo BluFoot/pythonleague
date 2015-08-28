@@ -1,113 +1,123 @@
-// get data
-function get_data() {
-    $.getJSON('data/item_tags.json', function(jd) {
-        riot_item_groups = jd;
-        files_opened++;
-        if (files_opened == 4) data_ready();
-    });
-    $.getJSON('data/champ_data.json', function(jd) {
+function get_mini_data() {
+    $.getJSON('data/mini_champ_data.json', function(jd) {
         champs = jd;
         files_opened++;
-        if (files_opened == 4) data_ready();
+        if (files_opened == 2) mini_data_ready();
     });
-    $.getJSON('data/item_data.json', function(jd) {
+    $.getJSON('data/mini_item_data.json', function(jd) {
         items = jd;
         files_opened++;
-        if (files_opened == 4) data_ready();
-    });
-    $.getJSON('data/matches_analyzed.json', function(jd) {
-        matches_analyzed = jd;
-        files_opened++;
-        if (files_opened == 4) data_ready();
+        if (files_opened == 2) mini_data_ready();
     });
 }
 
-function data_ready() {
+function mini_data_ready() {
     $(document).ready(function() {
         $("#ranked_solo").prop('checked', 'true');
         $("#champ").prop('checked', 'true');
         $(".all_filter").prop('checked', 'true');
+        get_all_data();
         post_icons();
         post_tables();
+    });
+}
+
+function get_all_data() {
+    files_opened = 0;
+    $.getJSON("get.php", {FILE:"data/champ_data.json"},function(data) {
+      champs = data;
+      files_opened++;
+      if (files_opened == 3) all_data_ready();
+    },"JSON");
+    $.post("get.php", {FILE:"data/item_data.json"},function(data) {
+      items = data;
+      files_opened++;
+      if (files_opened == 3) all_data_ready();
+    },"JSON");
+    $.getJSON('data/item_tags.json', function(jd) {
+        riot_item_groups = jd;
+        files_opened++;
+        if (files_opened == 3) all_data_ready();
+    });
+}
+
+function all_data_ready() {
+    refresh_data();
+    $("#queue_choice input").change(function() {
+        cur_queue = $(this).attr('id');
+        /* WIP
+        $("#league_choice").toggle();
+        */
         refresh_data();
+    });
 
-        // queue choice WIP
-        $("#queue_choice input").change(function() {
-            cur_queue = $(this).attr('id');
-            /* WIP
-            $("#league_choice").toggle();
-            */
-            refresh_data();
-        });
+    // species choice
+    $("#species_choice input").change(function() {
+        cur_species = $(this).attr('id');
+        refresh_data();
+    });
 
-        // species choice
-        $("#species_choice input").change(function() {
-            cur_species = $(this).attr('id');
-            refresh_data();
-        });
+    // icon clicks
+    $("#champ_icons input").change(function() {
+        refresh_data();
+    });
+    $("#item_icons input").change(function() {
+        refresh_data();
+    });
 
-        // icon clicks
-        $("#champ_icons input").change(function() {
-            refresh_data();
-        });
-        $("#item_icons input").change(function() {
-            refresh_data();
-        });
+    // data icon clicks
+    $("#data_wrapper").on('click', '.data_icon.champ_icon', function() {
+        key = $(this).attr('data-key');
+        if (!$("#all_item_icons").is(':checked') && !$("#all_champ_icons").is(':checked')) {
+            $("#all_item_icons").prop('checked', 'true');
+        }
+        $("#"+key).prop('checked', 'true');
+        refresh_data();
+    });
+    $("#data_wrapper").on('click', '.data_icon.item_icon', function() {
+        key = $(this).attr('data-key');
+        if (!$("#all_champ_icons").is(':checked') && !$("#all_item_icons").is(':checked')) {
+            $("#all_champ_icons").prop('checked', 'true');
+        }
+        $("#"+key).prop('checked', 'true'); 
+        refresh_data();
+    });
 
-        // data icon clicks
-        $("#data_wrapper").on('click', '.data_icon.champ_icon', function() {
-            key = $(this).attr('data-key');
-            if (!$("#all_item_icons").is(':checked') && !$("#all_champ_icons").is(':checked')) {
-                $("#all_item_icons").prop('checked', 'true');
-            }
-            $("#"+key).prop('checked', 'true');
-            refresh_data();
-        });
-        $("#data_wrapper").on('click', '.data_icon.item_icon', function() {
-            key = $(this).attr('data-key');
-            if (!$("#all_champ_icons").is(':checked') && !$("#all_item_icons").is(':checked')) {
-                $("#all_champ_icons").prop('checked', 'true');
-            }
-            $("#"+key).prop('checked', 'true'); 
-            refresh_data();
-        });
+    // post more data
+    $("#champ_more_button").click(function() {
+        post_more_champ_data();
+    });
+    $("#item_more_button").click(function() {
+        post_more_item_data();
+    });
 
-        // post more data
-        $("#champ_more_button").click(function() {
-            post_more_champ_data();
-        });
-        $("#item_more_button").click(function() {
-            post_more_item_data();
-        });
+    // searchbars
+    $("#champ_search").on('input', function() {
+        filter_champs(false);
+    });
+    $("#item_search").on('input', function() {
+        filter_items(false);
+    });
 
-        // searchbars
-        $("#champ_search").on('input', function() {
-            filter_champs(false);
-        });
-        $("#item_search").on('input', function() {
-            filter_items(false);
-        });
+    // filters
+    $("#champ_filters input").change(function() {
+        if (cur_species == 'item') {
+            $("#champ").prop('checked', 'true');
+            $("#species_choice input").trigger("change");
+        }
+        filter_champs(false);
+    });
+    $(".item_filters input").change(function() {
+        if (cur_species == 'champ') {
+            $("#item").prop('checked', 'true');
+            $("#species_choice input").trigger("change");
+        }
+        filter_items(false);
+    });
 
-        // filters
-        $("#champ_filters input").change(function() {
-            if (cur_species == 'item') {
-                $("#champ").prop('checked', 'true');
-                $("#species_choice input").trigger("change");
-            }
-            filter_champs(false);
-        });
-        $(".item_filters input").change(function() {
-            if (cur_species == 'champ') {
-                $("#item").prop('checked', 'true');
-                $("#species_choice input").trigger("change");
-            }
-            filter_items(false);
-        });
-
-        // splash button
-        $("#next_splash").click(function() {
-            next_splash();
-        });
+    // splash button
+    $("#next_splash").click(function() {
+        next_splash();
     });
 }
 
@@ -146,6 +156,7 @@ function Champ(key, queue) {
     this.playrate2 = champs[key].stats['5.14'][queue].playrate + '%';
     this.winrate1 = champs[key].stats['5.11'][queue].winrate + '%';
     this.winrate2 = champs[key].stats['5.14'][queue].winrate + '%';
+    this.winrate_diff = champs[key].stats['5.14'][queue].winrate_diff + '%';
 }
 
 function Item(key, queue) {
@@ -156,6 +167,7 @@ function Item(key, queue) {
     this.playrate2 = items[key].stats['5.14'][queue].playrate + '%';
     this.winrate1 = items[key].stats['5.11'][queue].winrate + '%';
     this.winrate2 = items[key].stats['5.14'][queue].winrate + '%';
+    this.winrate_diff = items[key].stats['5.14'][queue].winrate_diff + '%';
 }  
 
 function post_tables() {
@@ -180,11 +192,19 @@ function post_tables() {
                 {data: 'playrate1'},
                 {data: 'playrate2'}, 
                 {data: 'winrate1'},
-                {data: 'winrate2'}
+                {data: 'winrate2'},
+                {data: 'winrate_diff'}
             ],
-            "createdRow": function( row, data, dataIndex ) {
+            createdRow: function( row, data, dataIndex ) {
                 $(row).addClass('champ_row');
                 $(row).attr('data-key', data.key);
+                winrate_diff = parseInt(data.winrate_diff.slice(0, - 1));
+                if (winrate_diff > 0) {
+                    $('td', row).eq(6).css('color', 'green');
+                }
+                else if (winrate_diff < 0) {
+                    $('td', row).eq(6).css('color', 'red');
+                }
             }
         });
     }
@@ -207,14 +227,28 @@ function post_tables() {
                 {data: 'playrate1'},
                 {data: 'playrate2'}, 
                 {data: 'winrate1'},
-                {data: 'winrate2'}
+                {data: 'winrate2'},
+                {data: 'winrate_diff'}
             ],
-            "createdRow": function( row, data, dataIndex ) {
+            createdRow: function( row, data, dataIndex ) {
                 $(row).addClass('item_row');
                 $(row).attr('data-key', data.key);
+                winrate_diff = parseInt(data.winrate_diff.slice(0, - 1));
+                if (winrate_diff > 0) {
+                    $('td', row).eq(6).css('color', 'green');
+                }
+                else if (winrate_diff < 0) {
+                    $('td', row).eq(6).css('color', 'red');
+                }
             }
-        });
+        }); 
     }
+    $(".dataTables_scrollHeadInner").css('width', '100%');
+    $("table").css('width', '100%');
+    $(".data_page").hide();
+    $(".dataTables_wrapper").hide();
+    $("#" + cur_queue + "_" + cur_species + "_data_wrapper").show();
+    $("#overall_data").show();
 }
 
 function filter_champs(refresh) {
@@ -352,12 +386,13 @@ function refresh_data() {
 
 function post_overall_data() {
     $("#data_title").text(nice_queue[cur_queue] + ' ' + cur_species + ' stats');
-    $("#overall_data").show();
     $("#" + cur_queue + "_" + cur_species + "_data_wrapper").show();
+    $("#overall_data").show();
 }
 
 function post_champ_data(key) {
     $("#champ_more").show();
+    var txt0, txt1, txt2, top, top_length;
     var name = champs[key].name;
     $("#data_title").text(name);
     $("#champ_data").css('background-image', 'url("' + dragon_splash + key + '_0.jpg")');
@@ -367,38 +402,69 @@ function post_champ_data(key) {
         for (j = categories.length - 1; j >= 0; j--) {
             $("#champ_change" + i + j).text(champs[key].stats[patch][cur_queue][categories[j]] + '%');
             $("#champ_top" + i + j + " .top_img").empty();
-            var top = champs[key].items[patch][cur_queue]["top_" + categories[j]];
-            var top_length = top.length;
+            top = champs[key].items[patch][cur_queue]["top_" + categories[j]];
+            top_length =     top.length;
             for (k = 0; k < 10 && k < top_length; k++) {
                 name = items[top[k]].name;
                 rate = champs[key].items[patch][cur_queue][top[k]][categories[j]] + '%';
-                img = '<img data-key="'+top[k]+'" src="'+dragon_item+top[k]+'.png" title="'+rate+' '+name+'" class="icon item_icon data_icon">';
-                $("#champ_top" + i + j + " .top_img").append(img);
+                txt0 = '<figure class = "imgtxt">';
+                txt1 = '<img data-key="'+top[k]+'" src="'+dragon_item+top[k]+'.png" title="'+name+'" class="icon item_icon data_icon">';
+                txt2 = '<figcaption>' + rate + '</figcaption><figurediv>';
+                $("#champ_top" + i + j + " .top_img").append(txt0+txt1+txt2);
             }
         }
+    }
+    patch = patches[1];
+    top = champs[key].items[patch][cur_queue].top_winrate_diff;
+    top_length = top.length;
+    $("#champ_top12 .top_img").empty();
+    for (k = 0; k < 10 && k < top_length; k++) {
+        name = items[top[k]].name;
+        rate = champs[key].items[patch][cur_queue][top[k]].winrate_diff + '%';
+        txt0 = '<figure class = "imgtxt">';
+        txt1 = '<img data-key="'+top[k]+'" src="'+dragon_item+top[k]+'.png" title="'+name+'" class="icon item_icon data_icon">';
+        txt2 = '<figcaption>' + rate + '</figcaption><figurediv>';
+        $("#champ_top12 .top_img").append(txt0+txt1+txt2);
     }
     $("#champ_data").show();
 }
 
 function post_more_champ_data() {
     $("#champ_more").hide();
+    var txt0, txt1, txt2, top, top_length;
     var key = $("#champ_icons input:checked").attr('id');
     for (i = patches.length - 1; i >= 0; i--) {
         patch = patches[i];
         for (j = categories.length - 1; j >= 0; j--) {
-            var top = champs[key].items[patch][cur_queue]["top_" + categories[j]];
-            var top_length = top.length;
+            top = champs[key].items[patch][cur_queue]["top_" + categories[j]];
+            top_length = top.length;
             for (k = 10; k < 20 && k < top_length; k++) {
+                name = items[top[k]].name;
                 rate = champs[key].items[patch][cur_queue][top[k]][categories[j]] + '%';
-                img = '<img data-key="'+top[k]+'" src="'+dragon_item+top[k]+'.png" title="'+rate+' '+name+'" class="icon item_icon data_icon">';
-                $("#champ_top" + i + j + " .top_img").append(img);
+                txt0 = '<figure class = "imgtxt">';
+                txt1 = '<img data-key="'+top[k]+'" src="'+dragon_item+top[k]+'.png" title="'+name+'" class="icon item_icon data_icon">';
+                txt2 = '<figcaption>' + rate + '</figcaption><figurediv>';
+                $("#champ_top" + i + j + " .top_img").append(txt0+txt1+txt2);
             }
         }
+    }
+    patch = patches[1];
+    top = champs[key].items[patch][cur_queue].top_winrate_diff;
+    top_length = top.length;
+    for (k = 10; k < 20 && k < top_length; k++) {
+        name = items[top[k]].name;
+        rate = champs[key].items[patch][cur_queue][top[k]].winrate_diff + '%';
+        txt0 = '<figure class = "imgtxt">';
+        txt1 = '<img data-key="'+top[k]+'" src="'+dragon_item+top[k]+'.png" title="'+name+'" class="icon item_icon data_icon">';
+        txt2 = '<figcaption>' + rate + '</figcaption><figurediv>';
+        $("#champ_top12 .top_img").append(txt0+txt1+txt2);
     }
 }
 
 function post_item_data(key) {
+    $("#item_data").css('background-size', '150% auto');
     $("#item_more").show();
+    var txt0, txt1, txt2, top, top_length;
     var name = items[key].name;
     $("#data_title").text(name);
     $("#item_img").css('background-image', 'url(' + dragon_item + key + '.png)');
@@ -409,32 +475,64 @@ function post_item_data(key) {
         for (j = categories.length - 1; j >= 0; j--) {
             $("#item_change" + i + j).text(items[key].stats[patch][cur_queue][categories[j]] + '%');
             $("#item_top" + i + j + " .top_img").empty();
-            var top = items[key].champs[patch][cur_queue]["top_" + categories[j]];
-            var top_length = top.length;
+            top = items[key].champs[patch][cur_queue]["top_" + categories[j]];
+            top_length = top.length;
             for (k = 0; k < 10 && k < top_length; k++) {
+                name = champs[top[k]].name;
                 rate = items[key].champs[patch][cur_queue][top[k]][categories[j]] + '%';
-                img = '<img data-key="'+top[k]+'" src="'+dragon_champ+top[k]+'.png" title="'+rate+' '+name+'" class="icon champ_icon data_icon">';
-                $("#item_top" + i + j + " .top_img").append(img);
+                txt0 = '<figure class = "imgtxt">';
+                txt1 = '<img data-key="'+top[k]+'" src="'+dragon_champ+top[k]+'.png" title="'+name+'" class="icon champ_icon data_icon">';
+                txt2 = '<figcaption>' + rate + '</figcaption><figurediv>';
+                $("#item_top" + i + j + " .top_img").append(txt0+txt1+txt2);
             }
         }
+    }
+
+    patch = patches[1];
+    top = items[key].champs[patch][cur_queue].top_winrate_diff;
+    top_length = top.length;
+    $("#item_top12 .top_img").empty();
+    for (k = 0; k < 10 && k < top_length; k++) {
+        name = champs[top[k]].name;
+        rate = items[key].champs[patch][cur_queue][top[k]].winrate_diff + '%';
+        txt0 = '<figure class = "imgtxt">';
+        txt1 = '<img data-key="'+top[k]+'" src="'+dragon_champ+top[k]+'.png" title="'+name+'" class="icon champ_icon data_icon">';
+        txt2 = '<figcaption>' + rate + '</figcaption><figurediv>';
+        $("#item_top12 .top_img").append(txt0+txt1+txt2);
     }
     $("#item_data").show();
 }
 
 function post_more_item_data() {
+    $("#item_data").css('background-size', '170% auto');
     $("#item_more").hide();
+    var txt0, txt1, txt2, top, top_length;
     var key = $("#item_icons input:checked").attr('id');
     for (i = patches.length - 1; i >= 0; i--) {
         patch = patches[i];
         for (j = categories.length - 1; j >= 0; j--) {
-            var top = items[key].champs[patch][cur_queue]["top_" + categories[j]];
-            var top_length = top.length;
+            top = items[key].champs[patch][cur_queue]["top_" + categories[j]];
+            top_length = top.length;
             for (k = 10; k < 20 && k < top_length; k++) {
+                name = champs[top[k]].name;
                 rate = items[key].champs[patch][cur_queue][top[k]][categories[j]] + '%';
-                img = '<img data-key="'+top[k]+'" src="'+dragon_champ+top[k]+'.png" title="'+rate+' '+name+'" class="icon champ_icon data_icon">';
-                $("#item_top" + i + j + " .top_img").append(img);
+                txt0 = '<figure class = "imgtxt">';
+                txt1 = '<img data-key="'+top[k]+'" src="'+dragon_champ+top[k]+'.png" title="'+name+'" class="icon champ_icon data_icon">';
+                txt2 = '<figcaption>' + rate + '</figcaption><figurediv>';
+                $("#item_top" + i + j + " .top_img").append(txt0+txt1+txt2);
             }
         }
+    }
+    patch = patches[1];
+    top = items[key].champs[patch][cur_queue].top_winrate_diff;
+    top_length = top.length;
+    for (k = 10; k < 20 && k < top_length; k++) {
+        name = champs[top[k]].name;
+        rate = items[key].champs[patch][cur_queue][top[k]].winrate_diff + '%';
+        txt0 = '<figure class = "imgtxt">';
+        txt1 = '<img data-key="'+top[k]+'" src="'+dragon_champ+top[k]+'.png" title="'+name+'" class="icon champ_icon data_icon">';
+        txt2 = '<figcaption>' + rate + '</figcaption><figurediv>';
+        $("#item_top12 .top_img").append(txt0+txt1+txt2);
     }
 }
 
@@ -479,7 +577,7 @@ var matches_analyzed;
 var riot_champ_tags = ['Assassin', 'Fighter', 'Mage', 'Marksman', 'Support', 'Tank'];
 var riot_item_groups;
 var patch, patches = ['5.11', '5.14'];
-var cur_queue = 'normal_5x5', queues = ['normal_5x5', 'ranked_solo'];
+var cur_queue = 'ranked_solo', queues = ['normal_5x5', 'ranked_solo'];
 var nice_queue = {'normal_5x5': 'Normal', 'ranked_solo': 'Ranked'};
 var cur_species = 'champ';
 var categories = ['playrate', 'winrate'];
@@ -490,4 +588,4 @@ var dragon_champ = dragon + dragon_patch + 'img/champion/';
 var dragon_splash = 'splash/';
 var i, j;
 
-get_data();
+get_mini_data();

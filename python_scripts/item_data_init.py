@@ -30,7 +30,7 @@ for patch in patches :
             boots2 = 'Boots' in item['tags'] and name != 'Boots of Speed'
         if 'group' in item :
             goldbase = 'GoldBase' in item['group']    
-        exclusions = small_key or (name in boot_enchants) or ('Trinket' in name) or ingredient
+        exclusions = small_key or (name in boot_enchants) or ('Trinket' in name) or ('The Black Spear' in name) or ingredient
         #exclusions = False
         inclusions = sighstone or boots2 or goldbase
         if exclusions and not inclusions:
@@ -45,7 +45,7 @@ for patch in patches :
         for patch2 in patches :
             item_data[key]['stats'][patch2] = {'normal_5x5': {}, 'ranked_solo': {}}
             for queue in queues :
-                item_data[key]['stats'][patch2][queue] = {'plays': 0, 'wins': 0, 'playrate': 0, 'winrate': 0}
+                item_data[key]['stats'][patch2][queue] = {'playrate': 0, 'winrate': 0, 'winrate_diff': 0}
 
         item_data[key]['champs'] = {'5.11': {}, '5.14': {}}
         for patch2 in patches :
