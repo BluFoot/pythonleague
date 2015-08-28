@@ -18,8 +18,5 @@ We started this project with the goal of analyzing the effect of the AP item cha
 * A large display gives the optimal experience, but mobile phones can get every bit of information!
 * For champion's items by winrate, only items with >2% playrate are shown. Same for items' champions.
 
-###Contact
-alex@cornellier.com
-
 ### How the process works:
 curler.py downloads the match details. analyzer.py analyzes them into raw_data.json. champ_data_init.py, item_data_init.py and data_organizer.py organizes raw_data.json into data files in the web/data folder. 
