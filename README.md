@@ -1,7 +1,7 @@
 # Patch Comparer – 5.11 vs 5.14
 by Jeremie van der Sande
 
-I started this project with the goal of analyzing the effect of the AP item changes introduced in patch 5.12. However, we ended up spending much more time than originally planned and now we have this! The website presents champion and item statistics for the patches 5.11 and 5.14. 
+I started this project with the goal of analyzing the effect of the AP item changes introduced in patch 5.12. However, I ended up spending much more time than originally planned and now we have this! The website presents champion and item statistics for the patches 5.11 and 5.14. 
 
 ###Features
 * View playrates and winrates for champions and items.
