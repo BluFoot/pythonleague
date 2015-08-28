@@ -5,11 +5,10 @@ I started this project with the goal of analyzing the effect of the AP item chan
 
 ###Features
 * View playrates and winrates for champions and items.
-* Filter champions by role, both in the icon box and on the table.
-* Filter champions by role.
-* Filter items by category.
+* Filter champions by role, both in the icon box and on the table. Similar feature for items.
 * Filter champions/items by name through searchbars.
-* View most popular and highest winrate items for a champion, vice versa for items.
+* View most popular and highest winrate items for a champion by clicking on their icon on the left. Similar feature for items.
+* View exact statistics for any champion/item combination by selecting a champion AND an item.
 * Browse through beautiful champion splashes by pressing "Next splash" while browing a champion's page.
 * Switch between normal/ranked at any point!
 
