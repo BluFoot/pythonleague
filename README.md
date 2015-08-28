@@ -18,6 +18,7 @@ I started this project with the goal of analyzing the effect of the AP item chan
 * A large display gives the optimal experience, but mobile phones can get every bit of information!
 * For champion's items by winrate, only items with >2% playrate are shown. Same for items' champions.
 * Keep in mind that the item statistics are for people who have the item at the end of the game. So certain items like Mejai's have a high winrate not because they allow the game to be won, but because they are usually purchased after the game is already likely to be won.
+* Similarly, champions or items with extremely low playrates may have high winrates even though they are not exceptionally powerful.
 * Devourer statistics are messed up because of Sated.
 
 ### How the process works:
