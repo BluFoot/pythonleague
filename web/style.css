@@ -253,13 +253,13 @@ table {
     margin-bottom: 5px;
 }
 
-.champ_stats, .other_stats {
+.stats_box {
     background-color: rgba(80, 110, 140, 0.72);
     color: white;
     vertical-align: bottom;
 }
 
-#champ_data, #combo_data {
+#champ_combo_data {
     min-height: 600px;
     background-size: cover;
     background-position: center center;
@@ -270,7 +270,6 @@ table {
 #item_data {
     min-height: 600px;
     background-image: url("arcade.jpg");
-    background-size: 150% auto;
     background-repeat: no-repeat;
     text-align: left;
 }

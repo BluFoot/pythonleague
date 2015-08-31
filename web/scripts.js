@@ -103,14 +103,16 @@ function all_data_ready() {
     $("#champ_filters input").change(function() {
         if (cur_species == 'item') {
             $("#champ").prop('checked', 'true');
-            $("#species_choice input").trigger("change");
+            cur_species = 'champ';
+            refresh_data();
         }
         filter_champs(false);
     });
     $(".item_filters input").change(function() {
         if (cur_species == 'champ') {
             $("#item").prop('checked', 'true');
-            $("#species_choice input").trigger("change");
+            cur_species = 'item';
+            refresh_data();
         }
         filter_items(false);
     });
@@ -368,6 +370,7 @@ function filter_items(refresh) {
 }
 
 function refresh_data() {
+    log(cur_species)
     $(".data_page").hide();
     $(".dataTables_wrapper").hide();
     $("#data_title").empty();
@@ -391,12 +394,16 @@ function post_overall_data() {
 }
 
 function post_champ_data(key) {
-    $("#champ_more").show();
+    $("#data_title").text('LOADING DATA...');
+    $('<img/>').attr('src', dragon_splash + key + '_0.jpg').load(function() {
+       $(this).remove(); // prevent memory leaks as @benweet suggested
+       $("#champ_combo_data").css('background-image', 'url(' + dragon_splash + key + '_0.jpg)');
+       var name = champs[key].name;
+       $("#data_title").text(name);
+    });
+    $("#champ_combo_data").attr('data-skin', 0);
+
     var txt0, txt1, txt2, top, top_length;
-    var name = champs[key].name;
-    $("#data_title").text(name);
-    $("#champ_data").css('background-image', 'url("' + dragon_splash + key + '_0.jpg")');
-    $("#champ_data").attr('data-skin', 0);
     for (i = patches.length - 1; i >= 0; i--) {
         patch = patches[i];
         for (j = categories.length - 1; j >= 0; j--) {
@@ -426,6 +433,10 @@ function post_champ_data(key) {
         txt2 = '<figcaption>' + rate + '</figcaption><figurediv>';
         $("#champ_top12 .top_img").append(txt0+txt1+txt2);
     }
+
+    $("#data_title").text('LOADING IMAGE...');
+    $("#champ_more").show();
+    $("#champ_combo_data").show();
     $("#champ_data").show();
 }
 
@@ -462,7 +473,10 @@ function post_more_champ_data() {
 }
 
 function post_item_data(key) {
-    $("#item_data").css('background-size', '150% auto');
+    $("#item_data").css({
+        'background-size': '150%',
+        'background-position': 'default'
+    });
     $("#item_more").show();
     var txt0, txt1, txt2, top, top_length;
     var name = items[key].name;
@@ -504,7 +518,10 @@ function post_item_data(key) {
 }
 
 function post_more_item_data() {
-    $("#item_data").css('background-size', '170% auto');
+    $("#item_data").css({
+        'background-size': '230%',
+        'background-position': '30% 30%'
+    });
     $("#item_more").hide();
     var txt0, txt1, txt2, top, top_length;
     var key = $("#item_icons input:checked").attr('id');
@@ -537,12 +554,20 @@ function post_more_item_data() {
 }
 
 function post_combo_data(champ_key, item_key) {
+    $("#data_title").text('LOADING...');
+    var cur_champ_key = $("#champ_icons input:checked").attr('id');
+    if (cur_champ_key != champ_key) {
+        $('<img/>').attr('src', dragon_splash + champ_key + '_0.jpg').load(function() {
+           $(this).remove(); // prevent memory leaks as @benweet suggested
+           $("#champ_combo_data").css('background-image', 'url(' + dragon_splash + champ_key + '_0.jpg)');
+        }); 
+    }
+
     var champ_name = champs[champ_key].name;
     var item_name = items[item_key].name;
     $("#data_title").text(champ_name + ' with ' + item_name);
     $("#combo_champ_img").css('background-image', 'url(' + dragon_champ + champ_key + '.png)');
     $("#combo_item_img").css('background-image', 'url(' + dragon_item + item_key + '.png)');
-    $("#combo_data").css('background-image', 'url(' + dragon_splash + champ_key + '_0.jpg)');
 
     for (i = patches.length - 1; i >= 0; i--) {
         patch = patches[i];
@@ -556,16 +581,21 @@ function post_combo_data(champ_key, item_key) {
             }
         }
     }
+    $("#champ_combo_data").show();
     $("#combo_data").show();
 }
 
 function next_splash() {
     var key = $("#champ_icons input:checked").attr('id');
-    var skin_id = parseInt($("#champ_data").attr('data-skin'));
+    var skin_id = parseInt($("#champ_combo_data").attr('data-skin'));
     var skins = champs[key].skins;
     skin_id = (skin_id + 1) % skins;
-    $("#champ_data").attr('data-skin', skin_id);
-    $("#champ_data").css('background-image', 'url("' + dragon_splash + key + '_' + skin_id + '.jpg")');
+    $("#champ_combo_data").attr('data-skin', skin_id);
+    $('<img/>').attr('src', dragon_splash + key + '_' + skin_id + '.jpg').load(function() {
+       $(this).remove(); // prevent memory leaks as @benweet suggested
+       $("#champ_combo_data").css('background-image', 'url(' + dragon_splash + key + '_' + skin_id + '.jpg)');
+       $("#champ_combo_data").show();
+    });
 }
 
 var log = console.log.bind(console);

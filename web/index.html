@@ -20,7 +20,7 @@
 
 <body>
     <header>
-        <a id = "git" class = "filter" href = "https://github.com/BluFoot/pythonleague/blob/master/README.md">git</a>
+        <a id="git" class="filter" href="https://github.com/BluFoot/pythonleague/blob/master/README.md">git</a>
         <h1>PATCH COMPARER – 5.11 V 5.14</h1>
     </header>
     <div id="main">
@@ -127,51 +127,77 @@
                             <tbody></tbody>
                         </table>
                     </div>
-                    <div id="champ_data" class="data_page">
-                        <div id="champ_change" class="change_data">
-                            <section class="change champ_stats boxed">
-                                <h3>Playrate</h3>
-                                <h3>
-                                <span id = "champ_change00"></span>
-                                <span>&rarr;</span>
-                                <span id = "champ_change10"></span>
-                            </h3>
-                            </section>
-                            <section class="change champ_stats boxed">
-                                <h3>Winrate</h3>
-                                <h3>
-                                <span id = "champ_change01"></span>
-                                <span>&rarr;</span>
-                                <span id = "champ_change11"></span>
-                            </h3>
-                            </section>
-                            <section id="champ_more" class="change champ_stats boxed">
-                                <div id="champ_more_button" class="filter secondary">
-                                    More items
-                                </div>
-                            </section>
+                    <div id="champ_combo_data" class="data_page">
+                        <div id="champ_data" class="data_page">
+                            <div id="champ_change" class="change_data">
+                                <section class="change stats_box boxed">
+                                    <h3>Playrate</h3>
+                                    <h3>
+                                        <span id = "champ_change00"></span>
+                                        <span>&rarr;</span>
+                                        <span id = "champ_change10"></span>
+                                    </h3>
+                                </section>
+                                <section class="change stats_box boxed">
+                                    <h3>Winrate</h3>
+                                    <h3>
+                                        <span id = "champ_change01"></span>
+                                        <span>&rarr;</span>
+                                        <span id = "champ_change11"></span>
+                                    </h3>
+                                </section>
+                                <section id="champ_more" class="change stats_box boxed">
+                                    <div id="champ_more_button" class="filter secondary">
+                                        More items
+                                    </div>
+                                </section>
+                            </div>
+                            <div id="champ_top" class="top_data">
+                                <section id="champ_top00" class="stats_box odd boxed">
+                                    <h3>5.11 Most popular</h3>
+                                    <div class='top_img'></div>
+                                </section>
+                                <section id="champ_top10" class="stats_box even boxed">
+                                    <div class='top_img'></div>
+                                    <h3>5.14 Most popular</h3>
+                                </section>
+                                <section id="champ_top01" class="stats_box odd boxed">
+                                    <h3>5.11 Highest winrate</h3>
+                                    <div class='top_img'></div>
+                                </section>
+                                <section id="champ_top11" class="stats_box even boxed">
+                                    <div class='top_img'></div>
+                                    <h3>5.14 Highest winrate</h3>
+                                </section>
+                                <section id="champ_top12" class="stats_box odd boxed">
+                                    <h3>5.14 Highest winrate change</h3>
+                                    <div class='top_img'></div>
+                                </section>
+                            </div>
                         </div>
-                        <div id="champ_top" class="top_data">
-                            <section id="champ_top00" class="champ_stats odd boxed">
-                                <h3>5.11 Most popular</h3>
-                                <div class='top_img'></div>
-                            </section>
-                            <section id="champ_top10" class="champ_stats even boxed">
-                                <div class='top_img'></div>
-                                <h3>5.14 Most popular</h3>
-                            </section>
-                            <section id="champ_top01" class="champ_stats odd boxed">
-                                <h3>5.11 Highest winrate</h3>
-                                <div class='top_img'></div>
-                            </section>
-                            <section id="champ_top11" class="champ_stats even boxed">
-                                <div class='top_img'></div>
-                                <h3>5.14 Highest winrate</h3>
-                            </section>
-                            <section id="champ_top12" class="champ_stats odd boxed">
-                                <h3>5.14 Highest winrate change</h3>
-                                <div class='top_img'></div>
-                            </section>
+                        <div id="combo_data" class="data_page">
+                            <div id="combo_change" class="change_data">
+                                <section id="combo_champ_img" class="data_img champ_icon data_icon">
+                                </section>
+                                <section id="combo_item_img" class="data_img item_icon data_icon">
+                                </section>
+                                <section class="change stats_box even boxed">
+                                    <h3>Playrate</h3>
+                                    <h3>
+                                    <span id = "combo_change00"></span>
+                                    <span>&rarr;</span>
+                                    <span id = "combo_change10"></span>
+                                </h3>
+                                </section>
+                                <section class="change stats_box even boxed">
+                                    <h3>Winrate</h3>
+                                    <h3>
+                                    <span id = "combo_change01"></span>
+                                    <span>&rarr;</span>
+                                    <span id = "combo_change11"></span>
+                                </h3>
+                                </section>
+                            </div>                    
                         </div>
                         <div id="next_splash" class="filter secondary">
                             Next splash
@@ -181,7 +207,7 @@
                         <div id="item_change" class="change_data">
                             <section id="item_img" class="data_img">
                             </section>
-                            <section class="change other_stats boxed">
+                            <section class="change stats_box boxed">
                                 <h3>Playrate</h3>
                                 <h3>
                                 <span id = "item_change00"></span>
@@ -189,7 +215,7 @@
                                 <span id = "item_change10"></span>
                             </h3>
                             </section>
-                            <section class="change other_stats boxed">
+                            <section class="change stats_box boxed">
                                 <h3>Winrate</h3>
                                 <h3>
                                 <span id = "item_change01"></span>
@@ -197,56 +223,32 @@
                                 <span id = "item_change11"></span>
                             </h3>
                             </section>
-                            <section id="item_more" class="change other_stats boxed">
+                            <section id="item_more" class="change stats_box boxed">
                                 <div id="item_more_button" class="filter secondary">
                                     More champions
                                 </div>
                             </section>
                         </div>
                         <div id="item_top" class="top_data">
-                            <section id="item_top00" class="other_stats odd boxed">
+                            <section id="item_top00" class="stats_box odd boxed">
                                 <h3>5.11 Most popular</h3>
                                 <div class='top_img'></div>
                             </section>
-                            <section id="item_top10" class="other_stats even boxed">
+                            <section id="item_top10" class="stats_box even boxed">
                                 <div class='top_img'></div>
                                 <h3>5.14 Most popular</h3>
                             </section>
-                            <section id="item_top01" class="other_stats odd boxed">
+                            <section id="item_top01" class="stats_box odd boxed">
                                 <h3>5.11 Highest winrate</h3>
                                 <div class='top_img'></div>
                             </section>
-                            <section id="item_top11" class="other_stats even boxed">
+                            <section id="item_top11" class="stats_box even boxed">
                                 <div class='top_img'></div>
                                 <h3>5.14 Highest winrate</h3>
                             </section>
-                            <section id="item_top12" class="other_stats odd boxed">
+                            <section id="item_top12" class="stats_box odd boxed">
                                 <h3>Highest winrate change</h3>
                                 <div class='top_img'></div>
-                            </section>
-                        </div>
-                    </div>
-                    <div id="combo_data" class="data_page">
-                        <div id="combo_change" class="change_data">
-                            <section id="combo_champ_img" class="data_img champ_icon data_icon">
-                            </section>
-                            <section id="combo_item_img" class="data_img item_icon data_icon">
-                            </section>
-                            <section class="change other_stats even boxed">
-                                <h3>Playrate</h3>
-                                <h3>
-                                <span id = "combo_change00"></span>
-                                <span>&rarr;</span>
-                                <span id = "combo_change10"></span>
-                            </h3>
-                            </section>
-                            <section class="change other_stats even boxed">
-                                <h3>Winrate</h3>
-                                <h3>
-                                <span id = "combo_change01"></span>
-                                <span>&rarr;</span>
-                                <span id = "combo_change11"></span>
-                            </h3>
                             </section>
                         </div>
                     </div>
