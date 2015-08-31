@@ -29,3 +29,5 @@ curler.py downloads the match details. analyzer.py analyzes them into raw_data.j
 
 ###Future
 I hope to get a developper key and set up the website so that any 2 patches can be compared!
+
+Disclaimer: Patch Comparer isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.
